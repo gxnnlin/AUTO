@@ -115,11 +115,17 @@ jobs:
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz ./openwrt/bin/targets/x86/64/bin.tar.gz
         cd openwrt/bin/targets/x86/64
+        rm -rf packages && mkdir packages
+        find -name "*esxi-flat.vmdk*" | xargs -i mv -f {} packages
+        find -name "*kernel.bin*" | xargs -i mv -f {} packages
+        find -name "*rootfs*" | xargs -i mv -f {} packages
+        find -name "*.manifest*" | xargs -i mv -f {} packages
+        find -name "*vmlinuz*" | xargs -i mv -f {} packages
+        find -name "*esxi.vmdk*" | xargs -i mv -f {} packages
         rm -rf packages
-        bzip2 *.img
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
-
+      
     - name: Upload bin directory
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
