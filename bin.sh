@@ -9,6 +9,7 @@ sed -i 's/OpenWrt/Bin-Lean/g' package/base-files/files/bin/config_generate
 sed -i '92d' package/system/opkg/Makefile
 
 #添加额外软件包
+git clone https://github.com/gxnnlin/luci-packages.git package/openwrt-packages
 git clone https://github.com/lisaac/luci-app-dockerman.git package/openwrt-packages/luci-app-dockerman
 svn co https://github.com/xiaorouji/openwrt-passwall/trunk/brook package/openwrt-packages/brook
 svn co https://github.com/xiaorouji/openwrt-passwall/trunk/chinadns-ng package/openwrt-packages/chinadns-ng
