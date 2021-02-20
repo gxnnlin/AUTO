@@ -7,21 +7,6 @@
 sed -i 's/OpenWrt/Bin-Lean/g' package/base-files/files/bin/config_generate
 #关闭自建私有源签名验证
 sed -i '92d' package/system/opkg/Makefile
-cat >> .config <<EOF
-CONFIG_TARGET_KERNEL_PARTSIZE=128
-CONFIG_TARGET_ROOTFS_PARTSIZE=746
-EOF
-cat >> .config <<EOF
-CONFIG_PACKAGE_luci-theme-material=y
-# CONFIG_PACKAGE_luci-theme-netgear=y
-CONFIG_PACKAGE_luci-theme-argon-leanimg=y
-CONFIG_PACKAGE_luci-theme-edge=y
-CONFIG_PACKAGE_luci-theme-infinityfreedom=y
-EOF
-cat >> .config <<EOF
-CONFIG_VMDK_IMAGES=y
-EOF
-
 
 #添加额外软件包
 git clone https://github.com/gxnnlin/luci-packages.git package/openwrt-packages
